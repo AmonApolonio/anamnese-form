@@ -100,13 +100,13 @@ const questions: Question[] = [
     id: "q7",
     text: "ESCOLHA O BRINCO QUE MAIS COMBINE COM VOCÊ.",
     options: [
-      { id: "A", text: "", image: "/src/assets/female/q7/a.jpg" },
-      { id: "B", text: "", image: "/src/assets/female/q7/b.jpg" },
-      { id: "C", text: "", image: "/src/assets/female/q7/c.jpg" },
-      { id: "D", text: "", image: "/src/assets/female/q7/d.jpg" },
-      { id: "E", text: "", image: "/src/assets/female/q7/e.jpg" },
-      { id: "F", text: "", image: "/src/assets/female/q7/f.jpg" },
-      { id: "G", text: "", image: "/src/assets/female/q7/g.jpg" }
+      { id: "A", text: "", image: "/assets/female/q7/a.jpg" },
+      { id: "B", text: "", image: "/assets/female/q7/b.jpg" },
+      { id: "C", text: "", image: "/assets/female/q7/c.jpg" },
+      { id: "D", text: "", image: "/assets/female/q7/d.jpg" },
+      { id: "E", text: "", image: "/assets/female/q7/e.jpg" },
+      { id: "F", text: "", image: "/assets/female/q7/f.jpg" },
+      { id: "G", text: "", image: "/assets/female/q7/g.jpg" }
     ],
     condition: { questionId: "gender", optionId: "female" }
   },
@@ -114,13 +114,13 @@ const questions: Question[] = [
     id: "q8",
     text: "QUAL DESSAS CAMISAS VOCÊ USARIA NO SEU DIA A DIA?",
     options: [
-      { id: "A", text: "", image: "/src/assets/female/q8/a.jpg" },
-      { id: "B", text: "", image: "/src/assets/female/q8/b.jpg" },
-      { id: "C", text: "", image: "/src/assets/female/q8/c.jpg" },
-      { id: "D", text: "", image: "/src/assets/female/q8/d.jpg" },
-      { id: "E", text: "", image: "/src/assets/female/q8/e.jpg" },
-      { id: "F", text: "", image: "/src/assets/female/q8/f.jpg" },
-      { id: "G", text: "", image: "/src/assets/female/q8/g.jpg" }
+      { id: "A", text: "", image: "/assets/female/q8/a.jpg" },
+      { id: "B", text: "", image: "/assets/female/q8/b.jpg" },
+      { id: "C", text: "", image: "/assets/female/q8/c.jpg" },
+      { id: "D", text: "", image: "/assets/female/q8/d.jpg" },
+      { id: "E", text: "", image: "/assets/female/q8/e.jpg" },
+      { id: "F", text: "", image: "/assets/female/q8/f.jpg" },
+      { id: "G", text: "", image: "/assets/female/q8/g.jpg" }
     ],
     condition: { questionId: "gender", optionId: "female" }
   },
@@ -128,13 +128,13 @@ const questions: Question[] = [
     id: "q9",
     text: "ESCOLHA UM VESTIDO PARA UM HAPPY HOUR.",
     options: [
-      { id: "A", text: "", image: "/src/assets/female/q9/a.jpg" },
-      { id: "B", text: "", image: "/src/assets/female/q9/b.jpg" },
-      { id: "C", text: "", image: "/src/assets/female/q9/c.jpg" },
-      { id: "D", text: "", image: "/src/assets/female/q9/d.jpg" },
-      { id: "E", text: "", image: "/src/assets/female/q9/e.jpg" },
-      { id: "F", text: "", image: "/src/assets/female/q9/f.jpg" },
-      { id: "G", text: "", image: "/src/assets/female/q9/g.jpg" }
+      { id: "A", text: "", image: "/assets/female/q9/a.jpg" },
+      { id: "B", text: "", image: "/assets/female/q9/b.jpg" },
+      { id: "C", text: "", image: "/assets/female/q9/c.jpg" },
+      { id: "D", text: "", image: "/assets/female/q9/d.jpg" },
+      { id: "E", text: "", image: "/assets/female/q9/e.jpg" },
+      { id: "F", text: "", image: "/assets/female/q9/f.jpg" },
+      { id: "G", text: "", image: "/assets/female/q9/g.jpg" }
     ],
     condition: { questionId: "gender", optionId: "female" }
   },
@@ -142,13 +142,13 @@ const questions: Question[] = [
     id: "q10",
     text: "ESCOLHA UMA CALÇA PARA UM PASSEIO NO SHOPPING.",
     options: [
-      { id: "A", text: "", image: "/src/assets/female/q10/a.jpg" },
-      { id: "B", text: "", image: "/src/assets/female/q10/b.jpg" },
-      { id: "C", text: "", image: "/src/assets/female/q10/c.jpg" },
-      { id: "D", text: "", image: "/src/assets/female/q10/d.jpg" },
-      { id: "E", text: "", image: "/src/assets/female/q10/e.jpg" },
-      { id: "F", text: "", image: "/src/assets/female/q10/f.jpg" },
-      { id: "G", text: "", image: "/src/assets/female/q10/g.jpg" }
+      { id: "A", text: "", image: "/assets/female/q10/a.jpg" },
+      { id: "B", text: "", image: "/assets/female/q10/b.jpg" },
+      { id: "C", text: "", image: "/assets/female/q10/c.jpg" },
+      { id: "D", text: "", image: "/assets/female/q10/d.jpg" },
+      { id: "E", text: "", image: "/assets/female/q10/e.jpg" },
+      { id: "F", text: "", image: "/assets/female/q10/f.jpg" },
+      { id: "G", text: "", image: "/assets/female/q10/g.jpg" }
     ],
     condition: { questionId: "gender", optionId: "female" }
   },
@@ -156,13 +156,13 @@ const questions: Question[] = [
     id: "q11",
     text: "QUAL DESSAS SAIAS MAIS COMBINA COM VOCÊ?",
     options: [
-      { id: "A", text: "", image: "/src/assets/female/q11/a.jpg" },
-      { id: "B", text: "", image: "/src/assets/female/q11/b.jpg" },
-      { id: "C", text: "", image: "/src/assets/female/q11/c.jpg" },
-      { id: "D", text: "", image: "/src/assets/female/q11/d.jpg" },
-      { id: "E", text: "", image: "/src/assets/female/q11/e.jpg" },
-      { id: "F", text: "", image: "/src/assets/female/q11/f.jpg" },
-      { id: "G", text: "", image: "/src/assets/female/q11/g.jpg" }
+      { id: "A", text: "", image: "/assets/female/q11/a.jpg" },
+      { id: "B", text: "", image: "/assets/female/q11/b.jpg" },
+      { id: "C", text: "", image: "/assets/female/q11/c.jpg" },
+      { id: "D", text: "", image: "/assets/female/q11/d.jpg" },
+      { id: "E", text: "", image: "/assets/female/q11/e.jpg" },
+      { id: "F", text: "", image: "/assets/female/q11/f.jpg" },
+      { id: "G", text: "", image: "/assets/female/q11/g.jpg" }
     ],
     condition: { questionId: "gender", optionId: "female" }
   },
@@ -170,13 +170,13 @@ const questions: Question[] = [
     id: "q12",
     text: "QUAL DESSES SAPATOS MAIS COMBINAM COM VOCÊ?",
     options: [
-      { id: "A", text: "", image: "/src/assets/female/q12/a.jpg" },
-      { id: "B", text: "", image: "/src/assets/female/q12/b.jpg" },
-      { id: "C", text: "", image: "/src/assets/female/q12/c.jpg" },
-      { id: "D", text: "", image: "/src/assets/female/q12/d.jpg" },
-      { id: "E", text: "", image: "/src/assets/female/q12/e.jpg" },
-      { id: "F", text: "", image: "/src/assets/female/q12/f.jpg" },
-      { id: "G", text: "", image: "/src/assets/female/q12/g.jpg" }
+      { id: "A", text: "", image: "/assets/female/q12/a.jpg" },
+      { id: "B", text: "", image: "/assets/female/q12/b.jpg" },
+      { id: "C", text: "", image: "/assets/female/q12/c.jpg" },
+      { id: "D", text: "", image: "/assets/female/q12/d.jpg" },
+      { id: "E", text: "", image: "/assets/female/q12/e.jpg" },
+      { id: "F", text: "", image: "/assets/female/q12/f.jpg" },
+      { id: "G", text: "", image: "/assets/female/q12/g.jpg" }
     ],
     condition: { questionId: "gender", optionId: "female" }
   },
@@ -184,13 +184,13 @@ const questions: Question[] = [
     id: "q13",
     text: "QUAL DESSAS BOLSAS VOCÊ USARIA PARA PASSEAR NO SHOPPING?",
     options: [
-      { id: "A", text: "", image: "/src/assets/female/q13/a.jpg" },
-      { id: "B", text: "", image: "/src/assets/female/q13/b.jpg" },
-      { id: "C", text: "", image: "/src/assets/female/q13/c.jpg" },
-      { id: "D", text: "", image: "/src/assets/female/q13/d.jpg" },
-      { id: "E", text: "", image: "/src/assets/female/q13/e.jpg" },
-      { id: "F", text: "", image: "/src/assets/female/q13/f.jpg" },
-      { id: "G", text: "", image: "/src/assets/female/q13/g.jpg" }
+      { id: "A", text: "", image: "/assets/female/q13/a.jpg" },
+      { id: "B", text: "", image: "/assets/female/q13/b.jpg" },
+      { id: "C", text: "", image: "/assets/female/q13/c.jpg" },
+      { id: "D", text: "", image: "/assets/female/q13/d.jpg" },
+      { id: "E", text: "", image: "/assets/female/q13/e.jpg" },
+      { id: "F", text: "", image: "/assets/female/q13/f.jpg" },
+      { id: "G", text: "", image: "/assets/female/q13/g.jpg" }
     ],
     condition: { questionId: "gender", optionId: "female" }
   }
