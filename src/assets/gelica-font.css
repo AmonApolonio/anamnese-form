@@ -1,9 +1,0 @@
-/* Gelica font-face import (assumes font files in public/fonts or use Google Fonts if available) */
-@font-face {
-  font-family: 'Gelica';
-  src: url('/fonts/Gelica-Regular.woff2') format('woff2'),
-       url('/fonts/Gelica-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
