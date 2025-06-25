@@ -2,9 +2,10 @@ import React from 'react';
 
 interface WelcomeProps {
   onStart: () => void;
+  onSkipToPhotoUpload: () => void;
 }
 
-const Welcome: React.FC<WelcomeProps> = ({ onStart }) => {
+const Welcome: React.FC<WelcomeProps> = ({ onStart, onSkipToPhotoUpload }) => {
   return (
     <div className="bg-white rounded-lg shadow p-8 max-w-xl mx-auto mb-6 text-center">
       <div className="mb-8 flex justify-center">
@@ -20,12 +21,20 @@ const Welcome: React.FC<WelcomeProps> = ({ onStart }) => {
       </div>
       <h1 className="text-3xl font-bold font-fraunces mb-4 text-gray-800">Descubra Seu Estilo</h1>
       <p className="text-gray-600 mb-8">Responda algumas perguntas rápidas para descobrir seus estilos predominantes e receber recomendações personalizadas.</p>
-      <button
-        onClick={onStart}
-        className="px-8 py-3 rounded-lg bg-[#947B62] text-white font-semibold hover:bg-[#7a624e] transition-colors"
-      >
-        Começar Quiz
-      </button>
+      <div className="flex flex-col items-center gap-3">
+        <button
+          onClick={onStart}
+          className="px-8 py-3 rounded-lg bg-[#947B62] text-white font-semibold hover:bg-[#7a624e] transition-colors"
+        >
+          Começar Quiz
+        </button>
+        <button
+          onClick={onSkipToPhotoUpload}
+          className="px-8 py-3 rounded-lg border-2 border-[#947B62] text-[#947B62] font-semibold bg-white hover:bg-[#f5f0ea] transition-colors"
+        >
+          Começar Quiz pelas fotos
+        </button>
+      </div>
     </div>
   );
 };

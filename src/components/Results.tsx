@@ -27,7 +27,7 @@ const Results: React.FC<ResultsProps> = ({ styles, onRestart }) => {
             <div
               key={style.id}
               className={`p-5 rounded-lg ${
-                index === 0 ? 'bg-[#947B62]/20' : 'bg-gray-50'
+                index === 0 ? 'bg-[#F5F0EA]' : 'bg-gray-50'
               }`}
             >
               <div className="flex items-center justify-between">
