@@ -6,14 +6,80 @@ const MIN_PHOTOS = 1;
 // Get the N8N_POST_URL from Vite env
 const N8N_POST_URL = import.meta.env.VITE_N8N_POST_URL;
 
-const PhotoUpload: React.FC<{ onComplete: (photos: File[]) => void, onSkip?: () => void }> = ({
+// Utility to compress image files using canvas
+async function compressImage(file: File, maxSize = 550, quality = 0.7): Promise<File> {
+  return new Promise((resolve, reject) => {
+    const img = new window.Image();
+    img.onload = () => {
+      let { width, height } = img;
+      if (width > maxSize || height > maxSize) {
+        if (width > height) {
+          height = Math.round((height * maxSize) / width);
+          width = maxSize;
+        } else {
+          width = Math.round((width * maxSize) / height);
+          height = maxSize;
+        }
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return reject(new Error('Canvas not supported'));
+      ctx.drawImage(img, 0, 0, width, height);
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) return reject(new Error('Compression failed'));
+          const ext = file.type === 'image/png' ? 'png' : 'jpeg';
+          resolve(new File([blob], file.name, { type: `image/${ext}` }));
+        },
+        file.type === 'image/png' ? 'image/png' : 'image/jpeg',
+        quality
+      );
+    };
+    img.onerror = reject;
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+const PhotoUpload: React.FC<{
+  onComplete: (photos: { file: File; result: string }[]) => void,
+  onSkip?: () => void,
+  initialFiles?: { file: File; result: string }[]
+}> = ({
   onComplete,
   onSkip,
+  initialFiles = []
 }) => {
-  const [selectedFiles, setSelectedFiles] = useState<(File | null)[]>([null]);
+  const [selectedFiles, setSelectedFiles] = useState<(File | null)[]>(
+    initialFiles.length > 0 ? initialFiles.map(f => f.file) : [null]
+  );
   const [error, setError] = useState<string | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
+  const [uploaded, setUploaded] = useState<boolean>(initialFiles.length > 0);
+  const [uploadedResults, setUploadedResults] = useState<{ file: File; result: string }[]>(
+    initialFiles.length > 0 ? [...initialFiles] : []
+  );
   const fileInputs = useRef<(HTMLInputElement | null)[]>([]);
+
+  // If initialFiles changes (e.g. navigating back), update state
+  React.useEffect(() => {
+    if (initialFiles.length > 0) {
+      setSelectedFiles([...initialFiles.map(f => f.file)]);
+      setUploaded(true);
+    }
+  }, [initialFiles]);
+
+  // Reset uploaded state if files are removed or changed
+  React.useEffect(() => {
+    const filesCount = selectedFiles.filter(f => f !== null).length;
+    if (uploaded && filesCount < initialFiles.length) {
+      setUploaded(false);
+    }
+    if (uploaded && filesCount === 0) {
+      setUploaded(false);
+    }
+  }, [selectedFiles, initialFiles.length, uploaded]);
 
   // Ensure there's always one empty slot after the last selected photo (up to MAX_PHOTOS)
   const getDisplayFiles = () => {
@@ -25,12 +91,12 @@ const PhotoUpload: React.FC<{ onComplete: (photos: File[]) => void, onSkip?: () 
   };
 
   // Handle file selection for a specific slot
-  const handleFileChange = (
+  const handleFileChange = async (
     idx: number,
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (!e.target.files || !e.target.files[0]) return;
-    const file = e.target.files[0];
+    let file = e.target.files[0];
     // Prevent duplicate files (by name and size)
     if (
       selectedFiles.some(
@@ -42,6 +108,13 @@ const PhotoUpload: React.FC<{ onComplete: (photos: File[]) => void, onSkip?: () 
       )
     ) {
       setError('Esta foto já foi selecionada.');
+      return;
+    }
+    // Compress the image before saving
+    try {
+      file = await compressImage(file, 550, 0.7);
+    } catch (err) {
+      setError('Erro ao comprimir a imagem.');
       return;
     }
     setSelectedFiles((prev) => {
@@ -79,10 +152,10 @@ const PhotoUpload: React.FC<{ onComplete: (photos: File[]) => void, onSkip?: () 
     }
   };
 
-  // Send each photo in a separate POST request
+  // Send each photo in a separate POST request and collect n8n result
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const filesToSend = selectedFiles.filter(f => f);
+    const filesToSend = selectedFiles.filter(f => f) as File[];
     if (!filesToSend.length) {
       setError('Por favor, selecione pelo menos 1 foto.');
       return;
@@ -95,26 +168,27 @@ const PhotoUpload: React.FC<{ onComplete: (photos: File[]) => void, onSkip?: () 
       return;
     }
     try {
-      // Send each photo in a separate request
-      const uploadPromises = filesToSend
-        .map((file, idx) => {
-          if (!file) return null;
-          const formData = new FormData();
-          formData.append(`data`, file);
-          return fetch(N8N_POST_URL, {
-            method: 'POST',
-            body: formData,
-          }).then(res => {
-            if (!res.ok) throw new Error(`Erro ao enviar foto ${idx + 1}`);
-          });
-        })
-        .filter(Boolean) as Promise<void>[];
-      await Promise.all(uploadPromises);
+      const uploadPromises = filesToSend.map(async (file, idx) => {
+        const formData = new FormData();
+        formData.append(`data`, file);
+        const res = await fetch(N8N_POST_URL, {
+          method: 'POST',
+          body: formData,
+        });
+        if (!res.ok) throw new Error(`Erro ao enviar foto ${idx + 1}`);
+        const data = await res.json();
+        return { file, result: data.result };
+      });
+      const results = await Promise.all(uploadPromises);
       setUploading(false);
-      onComplete(filesToSend as File[]);
+      setUploaded(true);
+      setUploadedResults(results);
+      onComplete(results);
     } catch (err) {
       setError('Erro ao enviar as fotos.');
       setUploading(false);
+      setUploaded(false);
+      setUploadedResults([]);
       console.error('Erro ao enviar fotos:', err);
     }
   };
@@ -209,9 +283,9 @@ const PhotoUpload: React.FC<{ onComplete: (photos: File[]) => void, onSkip?: () 
             <button
               type="submit"
               className="bg-[#947B62] text-white px-6 py-2 rounded font-semibold shadow hover:bg-[#7a624a] transition disabled:opacity-50 w-full mt-2"
-              disabled={!(displayFiles.some(f => f) && !uploading)}
+              disabled={!(displayFiles.some(f => f) && !uploading) || uploaded}
             >
-              {uploading ? 'Processando...' : 'Enviar Fotos'}
+              {uploaded ? 'Fotos processadas' : uploading ? 'Processando...' : 'Enviar Fotos'}
             </button>
           </form>
         </div>

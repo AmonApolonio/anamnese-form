@@ -16,7 +16,7 @@ const Quiz: React.FC = () => {
   const [userAnswers, setUserAnswers] = useState<UserAnswer[]>([]);
   const [showResults, setShowResults] = useState<boolean>(false);
   const [styles, setStyles] = useState(styleTypes);
-  const [uploadedPhotos, setUploadedPhotos] = useState<File[]>([]);
+  const [uploadedPhotos, setUploadedPhotos] = useState<{ file: File; result: string }[]>([]);
   const [photoUploadFirst, setPhotoUploadFirst] = useState<boolean>(false);
 
   // Build the questions array with PhotoUpload as first or last
@@ -104,14 +104,13 @@ const Quiz: React.FC = () => {
   };
 
   // Handle photo upload completion (acts as answering the photo-upload question)
-  const handlePhotoUploadComplete = (photos: File[]) => {
+  const handlePhotoUploadComplete = (photos: { file: File; result: string }[]) => {
     setUploadedPhotos(photos);
     // Mark as answered for navigation (no 'value' property)
     handleAnswer({ questionId: PHOTO_UPLOAD_ID, optionId: 'uploaded' });
-    handleNext();
   };
 
-  // Calculate the results based on user answers
+  // Calculate the results based on user answers and photo results
   const calculateResults = () => {
     const updatedStyles = [...styles];
     userAnswers.forEach(answer => {
@@ -121,6 +120,16 @@ const Quiz: React.FC = () => {
       const styleIndex = updatedStyles.findIndex(style => style.id === answer.optionId);
       if (styleIndex !== -1) {
         // Increment the score for this style
+        updatedStyles[styleIndex] = {
+          ...updatedStyles[styleIndex],
+          score: updatedStyles[styleIndex].score + 1
+        };
+      }
+    });
+    // Add photo-upload results
+    uploadedPhotos.forEach(photo => {
+      const styleIndex = updatedStyles.findIndex(style => style.name === photo.result);
+      if (styleIndex !== -1) {
         updatedStyles[styleIndex] = {
           ...updatedStyles[styleIndex],
           score: updatedStyles[styleIndex].score + 1
@@ -149,7 +158,7 @@ const Quiz: React.FC = () => {
     return (
       <div className="min-h-screen bg-white py-8">
         <Header />
-        <Results styles={styles} onRestart={handleRestart} />
+        <Results styles={styles} onRestart={handleRestart} photoResults={uploadedPhotos} />
       </div>
     );
   }
@@ -163,10 +172,20 @@ const Quiz: React.FC = () => {
       />
       {currentQuestion && currentQuestion.id === PHOTO_UPLOAD_ID ? (
         <>
-          <PhotoUpload 
-            onComplete={handlePhotoUploadComplete} 
-            onSkip={handleNext} 
+          <PhotoUpload
+            onComplete={handlePhotoUploadComplete}
+            onSkip={handleNext}
+            initialFiles={uploadedPhotos}
           />
+          {uploadedPhotos.length > 0 && (
+            <NavigationButtons
+              onNext={handleNext}
+              onPrev={handlePrev}
+              isFirstQuestion={currentQuestionIndex === 0}
+              isLastQuestion={currentQuestionIndex === filteredQuestions.length - 1}
+              isCurrentQuestionAnswered={true}
+            />
+          )}
         </>
       ) : currentQuestion && 'text' in currentQuestion && 'options' in currentQuestion ? (
         <>
