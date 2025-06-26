@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import Header from './components/Header.tsx';
+import React, { useState, useEffect } from 'react';
 import ProgressBar from './components/ProgressBar.tsx';
 import QuestionCard from './components/QuestionCard.tsx';
 import NavigationButtons from './components/NavigationButtons.tsx';
 import Welcome from './components/Welcome.tsx';
 import Results from './components/Results.tsx';
 import PhotoUpload from './components/PhotoUpload.tsx';
+import BackToMenuButton from './components/BackToMenuButton';
 import questions from './questions';
 import { UserAnswer, styleTypes } from './types';
 
@@ -18,6 +18,18 @@ const Quiz: React.FC = () => {
   const [styles, setStyles] = useState(styleTypes);
   const [uploadedPhotos, setUploadedPhotos] = useState<{ file: File; result: string; tags?: string[] }[]>([]);
   const [photoUploadFirst, setPhotoUploadFirst] = useState<boolean>(false);
+
+  // Automatically set quiz state based on URL on mount
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const isQuizPath = url.pathname.endsWith('/quiz');
+    const photoUploadFirstParam = url.searchParams.get('photoUploadFirst');
+    if (isQuizPath) {
+      setCurrentQuestionIndex(0);
+      setPhotoUploadFirst(photoUploadFirstParam === 'true');
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+  }, []);
 
   // Build the questions array with PhotoUpload as first or last
   const filteredQuestions = (() => {
@@ -57,12 +69,14 @@ const Quiz: React.FC = () => {
   const handleStart = () => {
     setPhotoUploadFirst(false);
     setCurrentQuestionIndex(0);
+    window.scrollTo({ top: 0, behavior: 'auto' });
   };
 
   // Handle skipping directly to photo upload (photos first)
   const handleSkipToPhotoUpload = () => {
     setPhotoUploadFirst(true);
     setCurrentQuestionIndex(0);
+    window.scrollTo({ top: 0, behavior: 'auto' });
   };
 
   // Handle user answering a question
@@ -148,7 +162,7 @@ const Quiz: React.FC = () => {
   if (currentQuestionIndex === -1) {
     return (
       <div className="min-h-screen bg-white py-8">
-        <Header />
+        <BackToMenuButton />
         <Welcome onStart={handleStart} onSkipToPhotoUpload={handleSkipToPhotoUpload} />
       </div>
     );
@@ -157,7 +171,7 @@ const Quiz: React.FC = () => {
   if (showResults) {
     return (
       <div className="min-h-screen bg-white py-8">
-        <Header />
+        <BackToMenuButton />
         <Results styles={styles} onRestart={handleRestart} photoResults={uploadedPhotos} />
       </div>
     );
@@ -166,7 +180,7 @@ const Quiz: React.FC = () => {
   // Render the quiz flow, treating PhotoUpload as a question
   return (
     <div className="min-h-screen bg-white py-8">
-      <Header />
+      <BackToMenuButton />
       <ProgressBar
         currentStep={currentQuestionIndex + 1}
       />

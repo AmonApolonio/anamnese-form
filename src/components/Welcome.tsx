@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface WelcomeProps {
   onStart: () => void;
@@ -6,8 +7,10 @@ interface WelcomeProps {
 }
 
 const Welcome: React.FC<WelcomeProps> = ({ onStart, onSkipToPhotoUpload }) => {
+  const navigate = useNavigate();
+
   return (
-    <div className="bg-white rounded-lg shadow p-8 max-w-xl mx-auto mb-6 text-center">
+    <div className="p-8 max-w-xl mx-auto mb-6 text-center" style={{ backgroundColor: '#FAFAFA' }}>
       <div className="mb-8 flex justify-center">
         <div className="h-20 w-20 rounded-full bg-[#947B62] flex items-center justify-center">
           {/* Inline SVG icon */}
@@ -19,21 +22,39 @@ const Welcome: React.FC<WelcomeProps> = ({ onStart, onSkipToPhotoUpload }) => {
           </svg>
         </div>
       </div>
-      <h1 className="text-3xl font-bold font-fraunces mb-4 text-gray-800">Descubra Seu Estilo</h1>
-      <p className="text-gray-600 mb-8">Responda algumas perguntas rápidas para descobrir seus estilos predominantes e receber recomendações personalizadas.</p>
-      <div className="flex flex-col items-center gap-3">
-        <button
-          onClick={onStart}
-          className="px-8 py-3 rounded-lg bg-[#947B62] text-white font-semibold hover:bg-[#7a624e] transition-colors"
-        >
-          Começar Quiz
-        </button>
-        <button
-          onClick={onSkipToPhotoUpload}
-          className="px-8 py-3 rounded-lg border-2 border-[#947B62] text-[#947B62] font-semibold bg-white hover:bg-[#f5f0ea] transition-colors"
-        >
-          Começar Quiz pelas fotos
-        </button>
+      <div className="flex flex-col gap-8">
+        {/* First item: Descubra Seu Estilo */}
+        <div className="bg-white rounded-lg shadow p-6 text-center">
+          <h1 className="text-3xl font-bold font-fraunces mb-4 text-gray-800">Descubra Seu Estilo</h1>
+          <p className="text-gray-600 mb-8">Responda algumas perguntas rápidas para descobrir seus estilos predominantes e receber recomendações personalizadas.</p>
+          <div className="flex flex-col items-center gap-3">
+            <button
+              onClick={onStart}
+              className="px-8 py-3 rounded-lg bg-[#947B62] text-white font-semibold hover:bg-[#7a624e] transition-colors"
+            >
+              Começar Quiz
+            </button>
+            <button
+              onClick={onSkipToPhotoUpload}
+              className="px-8 py-3 rounded-lg border-2 border-[#947B62] text-[#947B62] font-semibold bg-white hover:bg-[#f5f0ea] transition-colors"
+            >
+              Começar Quiz pelas fotos
+            </button>
+          </div>
+        </div>
+        {/* Second item: Remova o fundo das suas fotos */}
+        <div className="bg-white rounded-lg shadow p-6 text-center">
+          <h2 className="text-2xl font-bold font-fraunces mb-4 text-gray-800">Remova o fundo das suas fotos</h2>
+          <p className="text-gray-600 mb-8">Transforme suas imagens em segundos com fundo transparente, pronto para montagens, designs ou apresentações.</p>
+          <div className="flex flex-col items-center gap-3">
+            <button
+              onClick={() => navigate('/remove-bg')}
+              className="px-8 py-3 rounded-lg bg-[#947B62] text-white font-semibold hover:bg-[#7a624e] transition-colors"
+            >
+              Experimentar agora
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
