@@ -6,7 +6,7 @@ import { faRedo } from '@fortawesome/free-solid-svg-icons';
 interface ResultsProps {
   styles: StyleType[];
   onRestart: () => void;
-  photoResults?: { file: File; result: string }[];
+  photoResults?: { file: File; result: string; tags?: string[] }[];
 }
 
 const Results: React.FC<ResultsProps> = ({ styles, onRestart, photoResults }) => {
@@ -62,6 +62,15 @@ const Results: React.FC<ResultsProps> = ({ styles, onRestart, photoResults }) =>
                   style={{ maxWidth: '180px' }}
                 />
                 <span className="font-semibold text-[#947B62] text-center">{photo.result}</span>
+                {photo.tags && photo.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1 mt-2 justify-center">
+                    {photo.tags.map((tag, tagIdx) => (
+                      <span key={tagIdx} className="bg-[#947B62] text-white text-xs rounded px-2 py-1 mr-1 mb-1">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>

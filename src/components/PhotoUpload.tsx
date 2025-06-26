@@ -43,9 +43,9 @@ async function compressImage(file: File, maxSize = 550, quality = 0.7): Promise<
 }
 
 const PhotoUpload: React.FC<{
-  onComplete: (photos: { file: File; result: string }[]) => void,
+  onComplete: (photos: { file: File; result: string; tags?: string[] }[]) => void,
   onSkip?: () => void,
-  initialFiles?: { file: File; result: string }[]
+  initialFiles?: { file: File; result: string; tags?: string[] }[]
 }> = ({
   onComplete,
   onSkip,
@@ -57,7 +57,7 @@ const PhotoUpload: React.FC<{
   const [error, setError] = useState<string | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
   const [uploaded, setUploaded] = useState<boolean>(initialFiles.length > 0);
-  const [uploadedResults, setUploadedResults] = useState<{ file: File; result: string }[]>(
+  const [uploadedResults, setUploadedResults] = useState<{ file: File; result: string; tags?: string[] }[]>(
     initialFiles.length > 0 ? [...initialFiles] : []
   );
   const fileInputs = useRef<(HTMLInputElement | null)[]>([]);
@@ -177,7 +177,18 @@ const PhotoUpload: React.FC<{
         });
         if (!res.ok) throw new Error(`Erro ao enviar foto ${idx + 1}`);
         const data = await res.json();
-        return { file, result: data.result };
+        let estilo = '';
+        let tags: string[] = [];
+        if (Array.isArray(data) && data[0]) {
+          estilo = data[0].estilo;
+          tags = data[0].tags;
+        } else if (data.estilo && data.tags) {
+          estilo = data.estilo;
+          tags = data.tags;
+        } else if (data.result) {
+          estilo = data.result;
+        }
+        return { file, result: estilo, tags };
       });
       const results = await Promise.all(uploadPromises);
       setUploading(false);

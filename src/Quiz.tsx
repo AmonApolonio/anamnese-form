@@ -16,7 +16,7 @@ const Quiz: React.FC = () => {
   const [userAnswers, setUserAnswers] = useState<UserAnswer[]>([]);
   const [showResults, setShowResults] = useState<boolean>(false);
   const [styles, setStyles] = useState(styleTypes);
-  const [uploadedPhotos, setUploadedPhotos] = useState<{ file: File; result: string }[]>([]);
+  const [uploadedPhotos, setUploadedPhotos] = useState<{ file: File; result: string; tags?: string[] }[]>([]);
   const [photoUploadFirst, setPhotoUploadFirst] = useState<boolean>(false);
 
   // Build the questions array with PhotoUpload as first or last
@@ -104,7 +104,7 @@ const Quiz: React.FC = () => {
   };
 
   // Handle photo upload completion (acts as answering the photo-upload question)
-  const handlePhotoUploadComplete = (photos: { file: File; result: string }[]) => {
+  const handlePhotoUploadComplete = (photos: { file: File; result: string; tags?: string[] }[]) => {
     setUploadedPhotos(photos);
     // Mark as answered for navigation (no 'value' property)
     handleAnswer({ questionId: PHOTO_UPLOAD_ID, optionId: 'uploaded' });
