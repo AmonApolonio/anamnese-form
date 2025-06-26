@@ -3,7 +3,7 @@ import { Question } from './types.ts';
 const questions: Question[] = [
   {
     id: "gender",
-    text: "Com qual genero você mais se identifica?",
+    text: "Com qual gênero você mais se identifica?",
     options: [
       { id: "male", text: "Masculino" },
       { id: "female", text: "Feminino" },
@@ -13,7 +13,7 @@ const questions: Question[] = [
   // Feminino path questions
   {
     id: "q1",
-    text: "DESCREVA SUA PERSONALIDADE:",
+    text: "Descreva sua personalidade:",
     options: [
       { id: "A", text: "Informal, espontânea, alegre, ativa, energética." },
       { id: "B", text: "Exigente, refinada, bem-sucedida, reservada." },
@@ -27,7 +27,7 @@ const questions: Question[] = [
   },
   {
     id: "q2",
-    text: "QUAL SEU TIPO DE ROUPA PREFERIDO?",
+    text: "Qual seu tipo de roupa preferido?",
     options: [
       { id: "A", text: "Roupas confortáveis, práticas de usar e cuidar." },
       { id: "B", text: "Roupas discretas, mas com toques refinados." },
@@ -41,7 +41,7 @@ const questions: Question[] = [
   },
   {
     id: "q3",
-    text: "PENSANDO NO SEU DIA A DIA, QUAIS SÃO AS COMBINAÇÕES DE CORES FAVORITAS?",
+    text: "Pensando no seu dia a dia, quais são as combinações de cores favoritas?",
     options: [
       { id: "A", text: "Combinações simples; não gosto de perder tempo pensando em combinações." },
       { id: "B", text: "Combinações de tons diferentes de uma mesma cor; gosto de escolher uma cor e variar as diferentes tonalidades dela em roupas e sapatos – monocromático." },
@@ -55,7 +55,7 @@ const questions: Question[] = [
   },
   {
     id: "q4",
-    text: "COMO GOSTO DE FAZER COMPRAS?",
+    text: "Como gosto de fazer compras?",
     options: [
       { id: "A", text: "Compro quando preciso; não gosto de perder tempo. Gosto de facilidades." },
       { id: "B", text: "Compro pensando em atualizar o que eu já tenho. Gosto de qualidade e atualidade." },
@@ -69,7 +69,7 @@ const questions: Question[] = [
   },
   {
     id: "q5",
-    text: "VOCÊ ESCOLHE CERTOS TECIDOS PRINCIPALMENTE PORQUE ELES...",
+    text: "Você escolhe certos tecidos principalmente porque eles...",
     options: [
       { id: "A", text: "São fáceis de cuidar." },
       { id: "B", text: "São sofisticados." },
@@ -83,7 +83,7 @@ const questions: Question[] = [
   },
   {
     id: "q6",
-    text: "COMO SÃO SEUS SAPATOS FAVORITOS?",
+    text: "Como são seus sapatos favoritos?",
     options: [
       { id: "A", text: "São essencialmente confortáveis." },
       { id: "B", text: "São essencialmente sofisticados." },
@@ -98,7 +98,7 @@ const questions: Question[] = [
   // Photo grid questions with image property
   {
     id: "q7",
-    text: "ESCOLHA O BRINCO QUE MAIS COMBINE COM VOCÊ.",
+    text: "Escolha o brinco que mais combine com você.",
     options: [
       { id: "A", text: "", image: "/assets/female/q7/a.jpg" },
       { id: "B", text: "", image: "/assets/female/q7/b.jpg" },
@@ -112,7 +112,7 @@ const questions: Question[] = [
   },
   {
     id: "q8",
-    text: "QUAL DESSAS CAMISAS VOCÊ USARIA NO SEU DIA A DIA?",
+    text: "Qual dessas camisas você usaria no seu dia a dia?",
     options: [
       { id: "A", text: "", image: "/assets/female/q8/a.jpg" },
       { id: "B", text: "", image: "/assets/female/q8/b.jpg" },
@@ -126,7 +126,7 @@ const questions: Question[] = [
   },
   {
     id: "q9",
-    text: "ESCOLHA UM VESTIDO PARA UM HAPPY HOUR.",
+    text: "Escolha um vestido para um happy hour.",
     options: [
       { id: "A", text: "", image: "/assets/female/q9/a.jpg" },
       { id: "B", text: "", image: "/assets/female/q9/b.jpg" },
@@ -140,7 +140,7 @@ const questions: Question[] = [
   },
   {
     id: "q10",
-    text: "ESCOLHA UMA CALÇA PARA UM PASSEIO NO SHOPPING.",
+    text: "Escolha uma calça para um passeio no shopping.",
     options: [
       { id: "A", text: "", image: "/assets/female/q10/a.jpg" },
       { id: "B", text: "", image: "/assets/female/q10/b.jpg" },
@@ -154,7 +154,7 @@ const questions: Question[] = [
   },
   {
     id: "q11",
-    text: "QUAL DESSAS SAIAS MAIS COMBINA COM VOCÊ?",
+    text: "Qual dessas saias mais combina com você?",
     options: [
       { id: "A", text: "", image: "/assets/female/q11/a.jpg" },
       { id: "B", text: "", image: "/assets/female/q11/b.jpg" },
@@ -168,7 +168,7 @@ const questions: Question[] = [
   },
   {
     id: "q12",
-    text: "QUAL DESSES SAPATOS MAIS COMBINAM COM VOCÊ?",
+    text: "Qual desses sapatos mais combinam com você?",
     options: [
       { id: "A", text: "", image: "/assets/female/q12/a.jpg" },
       { id: "B", text: "", image: "/assets/female/q12/b.jpg" },
@@ -182,7 +182,7 @@ const questions: Question[] = [
   },
   {
     id: "q13",
-    text: "QUAL DESSAS BOLSAS VOCÊ USARIA PARA PASSEAR NO SHOPPING?",
+    text: "Qual dessas bolsas você usaria para passear no shopping?",
     options: [
       { id: "A", text: "", image: "/assets/female/q13/a.jpg" },
       { id: "B", text: "", image: "/assets/female/q13/b.jpg" },
