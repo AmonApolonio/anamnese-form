@@ -66,7 +66,7 @@ const RemoveBg: React.FC = () => {
             continue;
           } else if (data.status === 'IN_PROGRESS') {
             setStatusText('Processando...');
-            await new Promise(res => setTimeout(res, 3000)); // 3s
+            await new Promise(res => setTimeout(res, 5000)); // 5s
             attempts++;
             continue;
           } else if (data.status === 'COMPLETED') {
@@ -261,7 +261,12 @@ const RemoveBg: React.FC = () => {
           <div className={`${resultUrl ? '' : 'hidden'} animate-fadein w-full`}>
             <h2 className="text-xl font-semibold mb-3 text-[#947B62]">Imagem com fundo removido:</h2>
             {resultUrl && (
-              <img src={resultUrl} alt="Resultado" className="mx-auto rounded-xl shadow-2xl border-2 border-[#947B62]/40 max-h-96 bg-white" />
+              <div className="relative flex justify-center items-center w-full">
+                <div className="relative" style={{display: 'inline-block', maxWidth: '100%', width: 'auto'}}>
+                  <div className="absolute inset-0 z-0 rounded-xl overflow-hidden animate-gradient-move" style={{filter: 'blur(16px)', opacity: 0.7, width: '100%', height: '100%'}} />
+                  <img src={resultUrl} alt="Resultado" className="relative z-10 mx-auto rounded-xl shadow-2xl border-2 border-[#947B62]/40 max-h-96" style={{ background: 'transparent', display: 'block', maxWidth: '100%', height: 'auto' }} />
+                </div>
+              </div>
             )}
             <div className="flex justify-center gap-3 mt-5">
               {resultUrl && (
@@ -303,6 +308,19 @@ const RemoveBg: React.FC = () => {
         @keyframes pulse-text {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.5; }
+        }
+        /* Moving gradient animation - now a constant wave */
+        .animate-gradient-move {
+          background: linear-gradient(120deg, #fff, #6C4A3D, #947B62, #fff, #C5A87E, #947B62, #6C4A3D, #fff);
+          background-size: 600% 600%;
+          animation: gradientMove 5s ease-in-out infinite;
+          width: 100%;
+          height: 100%;
+        }
+        @keyframes gradientMove {
+          0% { background-position: 10% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 10% 50%; }
         }
       `}</style>
     </div>
