@@ -39,7 +39,11 @@ const Quiz: React.FC = () => {
       const conditionAnswer = userAnswers.find(
         answer => answer.questionId === question.condition?.questionId
       );
-      return conditionAnswer && conditionAnswer.optionId === question.condition.optionId;
+      if (!conditionAnswer) return false;
+      if (Array.isArray(question.condition.optionId)) {
+        return question.condition.optionId.includes(conditionAnswer.optionId);
+      }
+      return conditionAnswer.optionId === question.condition.optionId;
     });
     // Insert PhotoUpload as first or last
     if (photoUploadFirst) {
@@ -64,6 +68,8 @@ const Quiz: React.FC = () => {
   const currentAnswer = userAnswers.find(
     answer => currentQuestion && answer.questionId === currentQuestion.id
   )?.optionId;
+
+  const genderAnswered = userAnswers.some(a => a.questionId === 'gender');
 
   // Handle starting the quiz (questions first)
   const handleStart = () => {
@@ -181,14 +187,16 @@ const Quiz: React.FC = () => {
   return (
     <div className="min-h-screen bg-white py-8">
       <BackToMenuButton />
-      <ProgressBar
-        currentStep={currentQuestionIndex + 1}
-      />
+      {genderAnswered && currentQuestion?.id !== 'gender' && (
+        <ProgressBar
+          currentStep={currentQuestionIndex + 1}
+          totalSteps={filteredQuestions.length}
+        />
+      )}
       {currentQuestion && currentQuestion.id === PHOTO_UPLOAD_ID ? (
         <>
           <PhotoUpload
             onComplete={handlePhotoUploadComplete}
-            onSkip={handleNext}
             initialFiles={uploadedPhotos}
           />
           {uploadedPhotos.length > 0 && (

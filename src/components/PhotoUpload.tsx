@@ -44,11 +44,9 @@ async function compressImage(file: File, maxSize = 550, quality = 0.7): Promise<
 
 const PhotoUpload: React.FC<{
   onComplete: (photos: { file: File; result: string; tags?: string[] }[]) => void,
-  onSkip?: () => void,
   initialFiles?: { file: File; result: string; tags?: string[] }[]
 }> = ({
   onComplete,
-  onSkip,
   initialFiles = []
 }) => {
   const [selectedFiles, setSelectedFiles] = useState<(File | null)[]>(
@@ -204,11 +202,6 @@ const PhotoUpload: React.FC<{
     }
   };
 
-  // Handle skip
-  const handleSkip = () => {
-    if (onSkip) onSkip();
-  };
-
   const displayFiles = getDisplayFiles();
 
   return (
@@ -219,7 +212,7 @@ const PhotoUpload: React.FC<{
             Fotos dos seus looks favoritos
           </h3>
           <p className="text-[#947B62] mb-6 w-full text-left">
-            Por favor, envie até 4 fotos usando seus looks favoritos para completar o quiz. Você pode pular esta etapa.
+            Por favor, envie até 4 fotos usando seus looks favoritos para completar o quiz.
           </p>
           <form
             onSubmit={handleSubmit}
@@ -275,18 +268,6 @@ const PhotoUpload: React.FC<{
                   )}
                 </div>
               ))}
-            </div>
-            <div className="flex w-full justify-end items-center mb-2">
-              {onSkip && (
-                <button
-                  type="button"
-                  className="text-[#947B62] underline ml-4"
-                  onClick={handleSkip}
-                  disabled={uploading}
-                >
-                  Pular
-                </button>
-              )}
             </div>
             {error && (
               <p className="text-red-500 mb-2 text-center w-full">{error}</p>

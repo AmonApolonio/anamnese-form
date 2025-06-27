@@ -13,87 +13,87 @@ const questions: Question[] = [
   // Feminino path questions
   {
     id: "q1",
-    text: "Descreva sua personalidade:",
+    text: "Caracterize a sua personalidade:",
     options: [
-      { id: "A", text: "Informal, espontânea, alegre, ativa, energética." },
-      { id: "B", text: "Exigente, refinada, bem-sucedida, reservada." },
-      { id: "C", text: "Feminina, meiga, delicada." },
-      { id: "D", text: "Glamourosa, excitante, sensual." },
-      { id: "E", text: "Sofisticada, moderna, firme." },
-      { id: "F", text: "Conservadora, séria, organizada." },
-      { id: "G", text: "Exótica, aventureira, inovadora." }
+      { id: "A", text: "Descontraída, impulsiva, divertida, dinâmica, cheia de energia;" },
+      { id: "B", text: "Rigorosa, elegante, realizada, discreta;" },
+      { id: "C", text: "Delicada, doce, suave;" },
+      { id: "D", text: "Atraente, provocante, sedutora;" },
+      { id: "E", text: "Sofisticada, contemporânea, decidida;" },
+      { id: "F", text: "Tradicional, formal, metódica;" },
+      { id: "G", text: "Diferente, ousada, criativa." }
     ],
-    condition: { questionId: "gender", optionId: "female" }
+    condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
   {
     id: "q2",
-    text: "Qual seu tipo de roupa preferido?",
+    text: "Que estilo de roupa você mais gosta de usar?",
     options: [
-      { id: "A", text: "Roupas confortáveis, práticas de usar e cuidar." },
-      { id: "B", text: "Roupas discretas, mas com toques refinados." },
-      { id: "C", text: "Roupas delicadas de cores suaves." },
-      { id: "D", text: "Estampa animal, detalhes que valorizam o corpo." },
-      { id: "E", text: "Roupas estruturadas, modernas." },
-      { id: "F", text: "Roupas discretas que passem desapercebidas." },
-      { id: "G", text: '"Mix" na hora de se vestir, roupas de brechó.' }
+      { id: "A", text: "Peças confortáveis, funcionais e fáceis de manter." },
+      { id: "B", text: "Roupas discretas, mas com acabamentos elegante." },
+      { id: "C", text: "Peças delicadas, femininas e em tons claros." },
+      { id: "D", text: "Estampa animal print e modelagens que evidenciem o corpo." },
+      { id: "E", text: "Modelagens estruturadas, atuais e alinhadas com a modernidade." },
+      { id: "F", text: "Roupas discretas que não chamem atenção." },
+      { id: "G", text: "Mistura criativa de estilos, incluindo peças de segunda mão." }
     ],
-    condition: { questionId: "gender", optionId: "female" }
+    condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
   {
     id: "q3",
     text: "Pensando no seu dia a dia, quais são as combinações de cores favoritas?",
     options: [
-      { id: "A", text: "Combinações simples; não gosto de perder tempo pensando em combinações." },
-      { id: "B", text: "Combinações de tons diferentes de uma mesma cor; gosto de escolher uma cor e variar as diferentes tonalidades dela em roupas e sapatos – monocromático." },
-      { id: "C", text: "Combinações delicadas em cores suaves, pois não gosto de grandes contrastes." },
-      { id: "D", text: "Combino só o que valoriza meu corpo, pois gosto de ver meu corpo bonito." },
-      { id: "E", text: "Faço combinações da moda, gosto de seguir tendências." },
-      { id: "F", text: "Combinações bem certinhas, de preferência cores neutras." },
-      { id: "G", text: "Não tenho preferência de combinações, cada dia combino de um jeito conforme o meu estado de espírito." }
+      { id: "A", text: "Combinações básicas; prefiro não gastar tempo escolhendo cores." },
+      { id: "B", text: "Variações de tons de uma mesma cor; prefiro escolher uma cor principal e brincar com suas nuances em roupas e acessórios – monocromático." },
+      { id: "C", text: "Combinações suaves e delicadas, evito contrastes marcantes." },
+      { id: "D", text: "Misturo apenas o que valoriza minha silhueta, gosto de destacar meu corpo." },
+      { id: "E", text: "Sigo combinações que estão em alta, adoro estar por dentro das tendências." },
+      { id: "F", text: "Cores bem coordenadas, de preferência discretas e neutras." },
+      { id: "G", text: "Minhas combinações mudam conforme meu humor; não sigo um padrão fixo." }
     ],
-    condition: { questionId: "gender", optionId: "female" }
+    condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
   {
     id: "q4",
-    text: "Como gosto de fazer compras?",
+    text: "Qual é o seu estilo de compra preferido?",
     options: [
-      { id: "A", text: "Compro quando preciso; não gosto de perder tempo. Gosto de facilidades." },
-      { id: "B", text: "Compro pensando em atualizar o que eu já tenho. Gosto de qualidade e atualidade." },
-      { id: "C", text: "Adoro ir às compras, compro por prazer e adoro tudo que tenha detalhes delicados." },
-      { id: "D", text: "Adoro comprar peças que valorizam o meu corpo. Gosto de tendência também." },
-      { id: "E", text: "Compro o que está nas vitrines, nas novelas, nas revistas. Adoro lançamentos." },
-      { id: "F", text: "Faço compras planejadas. Gosto de qualidade e não ligo pra moda." },
-      { id: "G", text: "Adoro lugares alternativos, brechós, feiras de artesanatos, pois adoro o incomum" }
+      { id: "A", text: "Só compro quando é necessário, prezo pela praticidade" },
+      { id: "B", text: "Faço compras para renovar o que já tenho; valorizo peças atuais e de boa qualidade." },
+      { id: "C", text: "Gosto muito de fazer compras, é um momento prazeroso, especialmente quando encontro itens delicados." },
+      { id: "D", text: "Prefiro adquirir peças que favoreçam minha silhueta. Também me interesso por tendências." },
+      { id: "E", text: "Me atraio pelo que vejo nas vitrines, na internet/redes sociais e nas revistas. Amo novidades e lançamentos." },
+      { id: "F", text: "Minhas compras são bem pensadas; busco durabilidade e não me preocupo com modismos." },
+      { id: "G", text: "Curto explorar lugares alternativos, como brechós e feiras artesanais, porque gosto do diferente e do exclusivo." }
     ],
-    condition: { questionId: "gender", optionId: "female" }
+    condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
   {
     id: "q5",
-    text: "Você escolhe certos tecidos principalmente porque eles...",
+    text: "Você prefere determinados tecidos principalmente porque eles...",
     options: [
-      { id: "A", text: "São fáceis de cuidar." },
+      { id: "A", text: "São práticos e simples de manter." },
       { id: "B", text: "São sofisticados." },
-      { id: "C", text: "São delicados." },
-      { id: "D", text: "São perfeitos no corpo." },
-      { id: "E", text: "São atuais, estão na moda." },
-      { id: "F", text: "São de qualidade." },
-      { id: "G", text: "São interessantes, diferentes, incomuns." }
+      { id: "C", text: "Possuem um toque suave e são delicados." },
+      { id: "D", text: "Valorizam bem o corpo e vestem com perfeição." },
+      { id: "E", text: "Estão em alta e refletem as últimas tendências." },
+      { id: "F", text: "Têm boa durabilidade e qualidade." },
+      { id: "G", text: "Têm um visual único, criativo e fora do comum." }
     ],
-    condition: { questionId: "gender", optionId: "female" }
+    condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
   {
     id: "q6",
-    text: "Como são seus sapatos favoritos?",
+    text: "Como você descreveria seus sapatos preferidos?",
     options: [
-      { id: "A", text: "São essencialmente confortáveis." },
-      { id: "B", text: "São essencialmente sofisticados." },
-      { id: "C", text: "São essencialmente delicados." },
-      { id: "D", text: "São essencialmente perfeitos para meu corpo." },
-      { id: "E", text: "São essencialmente lançamentos." },
-      { id: "F", text: "São essencialmente duráveis." },
-      { id: "G", text: "São essencialmente diferentes." }
+      { id: "A", text: "São principalmente confortáveis e práticos." },
+      { id: "B", text: "São principalmente elegantes." },
+      { id: "C", text: "São principalmente delicados." },
+      { id: "D", text: "São principalmente adequados ao meu corpo e valorizam minha postura." },
+      { id: "E", text: "São principalmente modernos e geralmente as últimas novidades." },
+      { id: "F", text: "São principalmente resistentes e de longa duração." },
+      { id: "G", text: "São principalmente exóticos." }
     ],
-    condition: { questionId: "gender", optionId: "female" }
+    condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
   // Photo grid questions with image property
   {
@@ -108,7 +108,7 @@ const questions: Question[] = [
       { id: "F", text: "", image: "/assets/female/q7/f.jpg" },
       { id: "G", text: "", image: "/assets/female/q7/g.jpg" }
     ],
-    condition: { questionId: "gender", optionId: "female" }
+    condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
   {
     id: "q8",
@@ -122,7 +122,7 @@ const questions: Question[] = [
       { id: "F", text: "", image: "/assets/female/q8/f.jpg" },
       { id: "G", text: "", image: "/assets/female/q8/g.jpg" }
     ],
-    condition: { questionId: "gender", optionId: "female" }
+    condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
   {
     id: "q9",
@@ -136,7 +136,7 @@ const questions: Question[] = [
       { id: "F", text: "", image: "/assets/female/q9/f.jpg" },
       { id: "G", text: "", image: "/assets/female/q9/g.jpg" }
     ],
-    condition: { questionId: "gender", optionId: "female" }
+    condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
   {
     id: "q10",
@@ -150,7 +150,7 @@ const questions: Question[] = [
       { id: "F", text: "", image: "/assets/female/q10/f.jpg" },
       { id: "G", text: "", image: "/assets/female/q10/g.jpg" }
     ],
-    condition: { questionId: "gender", optionId: "female" }
+    condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
   {
     id: "q11",
@@ -164,7 +164,7 @@ const questions: Question[] = [
       { id: "F", text: "", image: "/assets/female/q11/f.jpg" },
       { id: "G", text: "", image: "/assets/female/q11/g.jpg" }
     ],
-    condition: { questionId: "gender", optionId: "female" }
+    condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
   {
     id: "q12",
@@ -178,7 +178,7 @@ const questions: Question[] = [
       { id: "F", text: "", image: "/assets/female/q12/f.jpg" },
       { id: "G", text: "", image: "/assets/female/q12/g.jpg" }
     ],
-    condition: { questionId: "gender", optionId: "female" }
+    condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
   {
     id: "q13",
@@ -192,7 +192,78 @@ const questions: Question[] = [
       { id: "F", text: "", image: "/assets/female/q13/f.jpg" },
       { id: "G", text: "", image: "/assets/female/q13/g.jpg" }
     ],
-    condition: { questionId: "gender", optionId: "female" }
+    condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
+  },
+  // Masculino path questions
+  {
+    id: "m1",
+    text: "Quais são os elogios que você mais costuma receber dos seus amigos?",
+    options: [
+      { id: "A", text: "Descontraído, espontâneo, bem-humorado, sociável e divertido." },
+      { id: "B", text: "Tradicional, criterioso, confiável e discreto." },
+      { id: "C", text: "Sentimental, cuidadoso, gentil e afetuoso." },
+      { id: "D", text: "Atraente, destemido, envolvente, carismático e seguro de si." },
+      { id: "E", text: "Criativo, ousado, intenso e autêntico." },
+      { id: "F", text: "Sério, refinado e meticuloso." },
+      { id: "G", text: "Sofisticado, atual e determinado." }
+    ],
+    condition: { questionId: "gender", optionId: "male" }
+  },
+  {
+    id: "m2",
+    text: "Qual é o seu estilo de roupa preferido?",
+    options: [
+      { id: "A", text: "Peças confortáveis, funcionais e fáceis de manter." },
+      { id: "B", text: "Roupas discretas que não chamem atenção." },
+      { id: "C", text: "Roupas delicadas em tons claros e com um toque suave." },
+      { id: "D", text: "Roupas que destacam o físico." },
+      { id: "E", text: "Estilo variado e criativo, com peças de brechó ou achados alternativos." },
+      { id: "F", text: "Roupas discretas com detalhes sofisticados e elegantes." },
+      { id: "G", text: "Roupas estruturadas, visual contemporâneo e atual." }
+    ],
+    condition: { questionId: "gender", optionId: "male" }
+  },
+  {
+    id: "m3",
+    text: "O que você considera mais importante na hora de comprar roupas?",
+    options: [
+      { id: "A", text: "Que sejam confortáveis e agradáveis de usar." },
+      { id: "B", text: "Que tenham boa durabilidade e sejam de qualidade." },
+      { id: "C", text: "Que sejam leves, com bom caimento e movimento." },
+      { id: "D", text: "Que destaquem os pontos fortes do corpo." },
+      { id: "E", text: "Que sejam autênticas e diferentes." },
+      { id: "F", text: "Que transmitam elegância e bom gosto." },
+      { id: "G", text: "Que sejam tendências." }
+    ],
+    condition: { questionId: "gender", optionId: "male" }
+  },
+  {
+    id: "m4",
+    text: "Se você tivesse que escolher uma roupa para usar pelo resto da vida, qual seria?",
+    options: [
+      { id: "A", text: "Jeans básico, camiseta lisa, tênis casual e relógio de pulso." },
+      { id: "B", text: "Terno reto e estruturado, afastado do corpo e em tom neutro, e pasta executiva." },
+      { id: "C", text: "Calça de linho folgada, suéter em 'V' e sapatênis de couro cru." },
+      { id: "D", text: "Jeans justo, camisa slim, sapato social italiano e óculos escuros de marca." },
+      { id: "E", text: "Jeans colorido, camiseta decotada em tom vibrante." },
+      { id: "F", text: "Calça de alfaiataria, camisa branca, blazer clássico, cinto discreto e sapato formal." },
+      { id: "G", text: "Jeans verde oliva, camisa de flanela xadrez e tênis de cano alto." }
+    ],
+    condition: { questionId: "gender", optionId: "male" }
+  },
+  {
+    id: "m5",
+    text: "Qual é o seu passeio favorito?",
+    options: [
+      { id: "A", text: "Um café da manhã reforçado seguido de uma caminhada ao sol no parque." },
+      { id: "B", text: "Almoçar em um restaurante refinado e depois visitar uma galeria ou exposição." },
+      { id: "C", text: "Jantar à luz de velas em um ambiente intimista." },
+      { id: "D", text: "Happy hour em um barzinho com mesas ao ar livre." },
+      { id: "E", text: "Ir a eventos, apresentações teatrais e experimentar culinárias exóticas." },
+      { id: "F", text: "Comer em um restaurante famoso e assistir a um filme no cinema." },
+      { id: "G", text: "Explorar um destino diferente, onde nunca tenha estado." }
+    ],
+    condition: { questionId: "gender", optionId: "male" }
   }
 ];
 

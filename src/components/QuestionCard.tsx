@@ -50,7 +50,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ question, onAnswer, current
                 <div className="w-3 h-3 aspect-square bg-[#947B62] rounded-full"></div>
               )}
             </div>
-            <span className="text-gray-700">{option.text}</span>
+            <span className="text-gray-700 text-left w-full">{option.text}</span>
           </div>
         ))}
       </div>

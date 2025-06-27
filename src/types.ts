@@ -10,7 +10,7 @@ export type Question = {
   options: Option[];
   condition?: {
     questionId: string;
-    optionId: string;
+    optionId: string | string[];
   };
 };
 
