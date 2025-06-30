@@ -100,13 +100,13 @@ const questions: Question[] = [
     id: "q7",
     text: "Escolha o brinco que mais combine com você.",
     options: [
-      { id: "A", text: "", image: "/assets/female/q7/a.jpg" },
-      { id: "B", text: "", image: "/assets/female/q7/b.jpg" },
-      { id: "C", text: "", image: "/assets/female/q7/c.jpg" },
-      { id: "D", text: "", image: "/assets/female/q7/d.jpg" },
-      { id: "E", text: "", image: "/assets/female/q7/e.jpg" },
-      { id: "F", text: "", image: "/assets/female/q7/f.jpg" },
-      { id: "G", text: "", image: "/assets/female/q7/g.jpg" }
+      { id: "A", text: "", image: "/assets/female/q7/a.png" },
+      { id: "B", text: "", image: "/assets/female/q7/b.png" },
+      { id: "C", text: "", image: "/assets/female/q7/c.png" },
+      { id: "D", text: "", image: "/assets/female/q7/d.png" },
+      { id: "E", text: "", image: "/assets/female/q7/e.png" },
+      { id: "F", text: "", image: "/assets/female/q7/f.png" },
+      { id: "G", text: "", image: "/assets/female/q7/g.png" }
     ],
     condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
@@ -114,13 +114,13 @@ const questions: Question[] = [
     id: "q8",
     text: "Qual dessas camisas você usaria no seu dia a dia?",
     options: [
-      { id: "A", text: "", image: "/assets/female/q8/a.jpg" },
-      { id: "B", text: "", image: "/assets/female/q8/b.jpg" },
-      { id: "C", text: "", image: "/assets/female/q8/c.jpg" },
-      { id: "D", text: "", image: "/assets/female/q8/d.jpg" },
-      { id: "E", text: "", image: "/assets/female/q8/e.jpg" },
-      { id: "F", text: "", image: "/assets/female/q8/f.jpg" },
-      { id: "G", text: "", image: "/assets/female/q8/g.jpg" }
+      { id: "A", text: "", image: "/assets/female/q8/a.png" },
+      { id: "B", text: "", image: "/assets/female/q8/b.png" },
+      { id: "C", text: "", image: "/assets/female/q8/c.png" },
+      { id: "D", text: "", image: "/assets/female/q8/d.png" },
+      { id: "E", text: "", image: "/assets/female/q8/e.png" },
+      { id: "F", text: "", image: "/assets/female/q8/f.png" },
+      { id: "G", text: "", image: "/assets/female/q8/g.png" }
     ],
     condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
@@ -128,13 +128,13 @@ const questions: Question[] = [
     id: "q9",
     text: "Escolha um vestido para um happy hour.",
     options: [
-      { id: "A", text: "", image: "/assets/female/q9/a.jpg" },
-      { id: "B", text: "", image: "/assets/female/q9/b.jpg" },
-      { id: "C", text: "", image: "/assets/female/q9/c.jpg" },
-      { id: "D", text: "", image: "/assets/female/q9/d.jpg" },
-      { id: "E", text: "", image: "/assets/female/q9/e.jpg" },
-      { id: "F", text: "", image: "/assets/female/q9/f.jpg" },
-      { id: "G", text: "", image: "/assets/female/q9/g.jpg" }
+      { id: "A", text: "", image: "/assets/female/q9/a.png" },
+      { id: "B", text: "", image: "/assets/female/q9/b.png" },
+      { id: "C", text: "", image: "/assets/female/q9/c.png" },
+      { id: "D", text: "", image: "/assets/female/q9/d.png" },
+      { id: "E", text: "", image: "/assets/female/q9/e.png" },
+      { id: "F", text: "", image: "/assets/female/q9/f.png" },
+      { id: "G", text: "", image: "/assets/female/q9/g.png" }
     ],
     condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
@@ -142,13 +142,13 @@ const questions: Question[] = [
     id: "q10",
     text: "Escolha uma calça para um passeio no shopping.",
     options: [
-      { id: "A", text: "", image: "/assets/female/q10/a.jpg" },
-      { id: "B", text: "", image: "/assets/female/q10/b.jpg" },
-      { id: "C", text: "", image: "/assets/female/q10/c.jpg" },
-      { id: "D", text: "", image: "/assets/female/q10/d.jpg" },
-      { id: "E", text: "", image: "/assets/female/q10/e.jpg" },
-      { id: "F", text: "", image: "/assets/female/q10/f.jpg" },
-      { id: "G", text: "", image: "/assets/female/q10/g.jpg" }
+      { id: "A", text: "", image: "/assets/female/q10/a.png" },
+      { id: "B", text: "", image: "/assets/female/q10/b.png" },
+      { id: "C", text: "", image: "/assets/female/q10/c.png" },
+      { id: "D", text: "", image: "/assets/female/q10/d.png" },
+      { id: "E", text: "", image: "/assets/female/q10/e.png" },
+      { id: "F", text: "", image: "/assets/female/q10/f.png" },
+      { id: "G", text: "", image: "/assets/female/q10/g.png" }
     ],
     condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
@@ -156,13 +156,13 @@ const questions: Question[] = [
     id: "q11",
     text: "Qual dessas saias mais combina com você?",
     options: [
-      { id: "A", text: "", image: "/assets/female/q11/a.jpg" },
-      { id: "B", text: "", image: "/assets/female/q11/b.jpg" },
-      { id: "C", text: "", image: "/assets/female/q11/c.jpg" },
-      { id: "D", text: "", image: "/assets/female/q11/d.jpg" },
-      { id: "E", text: "", image: "/assets/female/q11/e.jpg" },
-      { id: "F", text: "", image: "/assets/female/q11/f.jpg" },
-      { id: "G", text: "", image: "/assets/female/q11/g.jpg" }
+      { id: "A", text: "", image: "/assets/female/q11/a.png" },
+      { id: "B", text: "", image: "/assets/female/q11/b.png" },
+      { id: "C", text: "", image: "/assets/female/q11/c.png" },
+      { id: "D", text: "", image: "/assets/female/q11/d.png" },
+      { id: "E", text: "", image: "/assets/female/q11/e.png" },
+      { id: "F", text: "", image: "/assets/female/q11/f.png" },
+      { id: "G", text: "", image: "/assets/female/q11/g.png" }
     ],
     condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
@@ -170,13 +170,13 @@ const questions: Question[] = [
     id: "q12",
     text: "Qual desses sapatos mais combinam com você?",
     options: [
-      { id: "A", text: "", image: "/assets/female/q12/a.jpg" },
-      { id: "B", text: "", image: "/assets/female/q12/b.jpg" },
-      { id: "C", text: "", image: "/assets/female/q12/c.jpg" },
-      { id: "D", text: "", image: "/assets/female/q12/d.jpg" },
-      { id: "E", text: "", image: "/assets/female/q12/e.jpg" },
-      { id: "F", text: "", image: "/assets/female/q12/f.jpg" },
-      { id: "G", text: "", image: "/assets/female/q12/g.jpg" }
+      { id: "A", text: "", image: "/assets/female/q12/a.png" },
+      { id: "B", text: "", image: "/assets/female/q12/b.png" },
+      { id: "C", text: "", image: "/assets/female/q12/c.png" },
+      { id: "D", text: "", image: "/assets/female/q12/d.png" },
+      { id: "E", text: "", image: "/assets/female/q12/e.png" },
+      { id: "F", text: "", image: "/assets/female/q12/f.png" },
+      { id: "G", text: "", image: "/assets/female/q12/g.png" }
     ],
     condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
@@ -184,13 +184,13 @@ const questions: Question[] = [
     id: "q13",
     text: "Qual dessas bolsas você usaria para passear no shopping?",
     options: [
-      { id: "A", text: "", image: "/assets/female/q13/a.jpg" },
-      { id: "B", text: "", image: "/assets/female/q13/b.jpg" },
-      { id: "C", text: "", image: "/assets/female/q13/c.jpg" },
-      { id: "D", text: "", image: "/assets/female/q13/d.jpg" },
-      { id: "E", text: "", image: "/assets/female/q13/e.jpg" },
-      { id: "F", text: "", image: "/assets/female/q13/f.jpg" },
-      { id: "G", text: "", image: "/assets/female/q13/g.jpg" }
+      { id: "A", text: "", image: "/assets/female/q13/a.png" },
+      { id: "B", text: "", image: "/assets/female/q13/b.png" },
+      { id: "C", text: "", image: "/assets/female/q13/c.png" },
+      { id: "D", text: "", image: "/assets/female/q13/d.png" },
+      { id: "E", text: "", image: "/assets/female/q13/e.png" },
+      { id: "F", text: "", image: "/assets/female/q13/f.png" },
+      { id: "G", text: "", image: "/assets/female/q13/g.png" }
     ],
     condition: { questionId: "gender", optionId: ["female", "prefer_not_to_say"] }
   },
