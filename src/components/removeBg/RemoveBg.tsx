@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BackToMenuButton from './BackToMenuButton';
+import BackToMenuButton from '../shared/BackToMenuButton';
+import UrlImageInput from '../shared/UrlImageInput';
+import RandomUrlButton from '../shared/RandomUrlButton';
+import Loader from '../quiz/Loader';
+import AnimationsStyles from '../shared/AnimationsStyles';
 
 // List of random image URLs (populate as needed)
 const RANDOM_IMAGE_URLS = [
@@ -29,7 +33,7 @@ const RemoveBg: React.FC = () => {
     let attempts = 0;
     while (attempts < 60) {
       try {
-        const response = await fetch(import.meta.env.VITE_N8N_POST_URL3, {
+        const response = await fetch(import.meta.env.VITE_REMOVE_BACKGROUND_POLL_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id }),
@@ -112,7 +116,7 @@ const RemoveBg: React.FC = () => {
     const timeoutId = setTimeout(() => controller.abort(), 180000); // 3 minutes
     try {
       // Step 1: Submit image URL
-      const response = await fetch(import.meta.env.VITE_N8N_POST_URL2, {
+      const response = await fetch(import.meta.env.VITE_REMOVE_BACKGROUND_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: imageUrl }),
@@ -157,42 +161,14 @@ const RemoveBg: React.FC = () => {
             className={`flex flex-col gap-5 w-full ${resultUrl ? 'hidden' : ''}`}
           >
             <div className="relative w-full">
-              <input
-                type="url"
-                required
-                placeholder="Cole a URL da imagem aqui..."
-                value={imageUrl}
-                onChange={e => {
-                  setImageUrl(e.target.value);
-                  setIsImageValid(true);
-                }}
-                className="px-5 py-3 pr-12 rounded-xl bg-white border-2 border-[#947B62] focus:outline-none focus:ring-4 focus:ring-[#947B62]/30 transition-all w-full text-gray-800 shadow-sm placeholder:text-gray-400"
+              <UrlImageInput
+                imageUrl={imageUrl}
+                onImageUrlChange={setImageUrl}
+                isImageValid={isImageValid}
+                onImageValidityChange={setIsImageValid}
+                disabled={loading}
               />
-              {imageUrl && (
-                <button
-                  type="button"
-                  onClick={() => { setImageUrl(''); setIsImageValid(true); }}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-[#f3ede7] hover:bg-[#e5dbce] text-[#947B62] transition-colors shadow focus:outline-none"
-                  title="Limpar campo"
-                  tabIndex={0}
-                >
-                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M6 6l8 8M6 14L14 6" stroke="#947B62" strokeWidth="2" strokeLinecap="round"/></svg>
-                </button>
-              )}
             </div>
-            {imageUrl && isImageValid && (
-              <img
-                src={imageUrl}
-                alt="Pré-visualização"
-                className="mx-auto rounded-xl shadow-lg max-h-52 object-contain border-2 border-[#947B62]/30 bg-gray-50 transition-all duration-300 animate-fadein"
-                style={{ marginTop: 8 }}
-                onError={() => setIsImageValid(false)}
-                onLoad={() => setIsImageValid(true)}
-              />
-            )}
-            {imageUrl && !isImageValid && (
-              <div className="text-red-500 text-sm font-medium animate-fadein">Não foi possível carregar a imagem. Verifique se a URL é válida e acessível.</div>
-            )}
             {/* Only show remove button if input is not empty */}
             {imageUrl && (
               <button
@@ -200,61 +176,20 @@ const RemoveBg: React.FC = () => {
                 className="px-8 py-3 rounded-xl bg-[#947B62] text-white font-semibold shadow hover:bg-[#7a624e] focus:ring-4 focus:ring-[#947B62]/30 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                 disabled={loading || !imageUrl || !isImageValid}
               >
-                {loading ? (
-                  <span className="flex flex-col items-center justify-center gap-2">
-                    {/* Enhanced SVG Loader: Two animated circles */}
-                    <span className="relative w-10 h-10 inline-block">
-                      <svg className="absolute top-0 left-0 animate-spin-smooth" width="40" height="40" viewBox="0 0 50 50">
-                        <defs>
-                          <linearGradient id="loader-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="#947B62" />
-                            <stop offset="100%" stopColor="#e5dbce" />
-                          </linearGradient>
-                        </defs>
-                        <circle
-                          cx="25"
-                          cy="25"
-                          r="20"
-                          fill="none"
-                          stroke="url(#loader-gradient)"
-                          strokeWidth="5"
-                          strokeLinecap="round"
-                          strokeDasharray="90 150"
-                          opacity="0.8"
-                        />
-                      </svg>
-                      <svg className="absolute top-0 left-0 animate-spin-reverse" width="40" height="40" viewBox="0 0 50 50">
-                        <circle
-                          cx="25"
-                          cy="25"
-                          r="15"
-                          fill="none"
-                          stroke="#e5dbce"
-                          strokeWidth="3"
-                          strokeDasharray="40 60"
-                          opacity="0.7"
-                        />
-                      </svg>
-                    </span>
-                    <span className="ml-2 animate-pulse-text">{statusText || 'Processando...'}</span>
-                  </span>
-                ) : 'Remover Fundo'}
+                {loading ? <Loader statusText={statusText} /> : 'Remover Fundo'}
               </button>
             )}
           </form>
           {/* Show random button if input is empty and not loading */}
           {!resultUrl && !imageUrl && !loading && (
-            <button
-              type="button"
+            <RandomUrlButton
               className="px-8 py-3 rounded-xl bg-[#947B62] text-white font-semibold shadow hover:bg-[#7a624e] focus:ring-4 focus:ring-[#947B62]/30 transition-all disabled:opacity-60 disabled:cursor-not-allowed mt-5"
-              onClick={() => {
+              onGetRandomUrl={() => {
                 const randomUrl = RANDOM_IMAGE_URLS[Math.floor(Math.random() * RANDOM_IMAGE_URLS.length)];
                 setImageUrl(randomUrl);
                 setIsImageValid(true);
               }}
-            >
-              Obter URL Aleatória
-            </button>
+            />
           )}
           {error && <div className="text-red-500 mt-5 animate-fadein font-medium">{error}</div>}
           {/* Result section, always rendered but hidden if not active */}
@@ -283,46 +218,7 @@ const RemoveBg: React.FC = () => {
           </div>
         </div>
       </div>
-      <style>{`
-        .animate-fadein { animation: fadein 0.7s; }
-        @keyframes fadein { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
-        .animate-spin-smooth {
-          animation: spin-smooth 1s linear infinite;
-          display: inline-block;
-          vertical-align: middle;
-        }
-        @keyframes spin-smooth {
-          100% { transform: rotate(360deg); }
-        }
-        .animate-spin-reverse {
-          animation: spin-reverse 1.5s linear infinite;
-          display: inline-block;
-          vertical-align: middle;
-        }
-        @keyframes spin-reverse {
-          100% { transform: rotate(-360deg); }
-        }
-        .animate-pulse-text {
-          animation: pulse-text 1.2s infinite;
-        }
-        @keyframes pulse-text {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
-        }
-        /* Moving gradient animation - now a constant wave */
-        .animate-gradient-move {
-          background: linear-gradient(120deg, #fff, #6C4A3D, #947B62, #fff, #C5A87E, #947B62, #6C4A3D, #fff);
-          background-size: 600% 600%;
-          animation: gradientMove 5s ease-in-out infinite;
-          width: 100%;
-          height: 100%;
-        }
-        @keyframes gradientMove {
-          0% { background-position: 10% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 10% 50%; }
-        }
-      `}</style>
+      <AnimationsStyles />
     </div>
   );
 };

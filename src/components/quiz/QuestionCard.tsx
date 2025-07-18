@@ -1,5 +1,5 @@
 import React from 'react';
-import { Question, Option, UserAnswer } from '../types';
+import { Question, Option, UserAnswer } from '../../types';
 
 interface QuestionCardProps {
   question: Question;

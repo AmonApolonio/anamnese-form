@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import ProgressBar from './components/ProgressBar.tsx';
-import QuestionCard from './components/QuestionCard.tsx';
-import NavigationButtons from './components/NavigationButtons.tsx';
 import Welcome from './components/Welcome.tsx';
-import Results from './components/Results.tsx';
-import PhotoUpload from './components/PhotoUpload.tsx';
-import BackToMenuButton from './components/BackToMenuButton';
 import questions from './questions';
 import { UserAnswer, styleTypes } from './types';
+import BackToMenuButton from './components/shared/BackToMenuButton.tsx';
+import Results from './components/quiz/Results.tsx';
+import ProgressBar from './components/quiz/ProgressBar.tsx';
+import QuestionCard from './components/quiz/QuestionCard.tsx';
+import PhotoUpload from './components/quiz/PhotoUpload.tsx';
+import NavigationButtons from './components/quiz/NavigationButtons.tsx';
 
 const PHOTO_UPLOAD_ID = 'photo-upload';
 

@@ -2,9 +2,10 @@ import React from 'react';
 import './index.css'; // Import base styles and font
 import './App.css'; // Import our custom CSS
 import Quiz from './Quiz.tsx';
-import RemoveBg from './components/RemoveBg';
 import Welcome from './components/Welcome';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import RemoveBg from './components/removeBg/RemoveBg.tsx';
+import Coloracao from './components/coloracao/Coloracao.tsx';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<WelcomePageWrapper />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/remove-bg" element={<RemoveBg />} />
+          <Route path="/coloracao" element={<Coloracao />} />
         </Routes>
       </div>
     </Router>

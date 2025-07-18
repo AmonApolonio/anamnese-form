@@ -4,7 +4,7 @@ const MAX_PHOTOS = 4;
 const MIN_PHOTOS = 1;
 
 // Get the N8N_POST_URL from Vite env
-const N8N_POST_URL = import.meta.env.VITE_N8N_POST_URL;
+const N8N_POST_URL = import.meta.env.VITE_STYLE_ANALYSIS_URL;
 
 // Utility to compress image files using canvas
 async function compressImage(file: File, maxSize = 550, quality = 0.7): Promise<File> {

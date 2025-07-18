@@ -55,6 +55,19 @@ const Welcome: React.FC<WelcomeProps> = ({ onStart, onSkipToPhotoUpload }) => {
             </button>
           </div>
         </div>
+        {/* Third item: Coloração Pessoal */}
+        <div className="bg-white rounded-lg shadow p-6 text-center">
+          <h2 className="text-2xl font-bold font-fraunces mb-4 text-gray-800">Coloração Pessoal</h2>
+          <p className="text-gray-600 mb-8">Analise suas fotos e descubra sua paleta de cores personalizada para destacar sua beleza natural.</p>
+          <div className="flex flex-col items-center gap-3">
+            <button
+              onClick={() => navigate('/coloracao')}
+              className="px-8 py-3 rounded-lg bg-[#947B62] text-white font-semibold hover:bg-[#7a624e] transition-colors"
+            >
+              Descubra agora
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

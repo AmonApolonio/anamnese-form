@@ -1,5 +1,5 @@
 import React from 'react';
-import questions from '../questions';
+import questions from '../../questions';
 
 interface ProgressBarProps {
   currentStep: number;
