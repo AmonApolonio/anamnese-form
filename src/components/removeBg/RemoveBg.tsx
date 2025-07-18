@@ -5,6 +5,7 @@ import UrlImageInput from '../shared/UrlImageInput';
 import RandomUrlButton from '../shared/RandomUrlButton';
 import Loader from '../quiz/Loader';
 import AnimationsStyles from '../shared/AnimationsStyles';
+import EnvConfig from '../../config/envConfig';
 
 // List of random image URLs (populate as needed)
 const RANDOM_IMAGE_URLS = [
@@ -33,7 +34,7 @@ const RemoveBg: React.FC = () => {
     let attempts = 0;
     while (attempts < 60) {
       try {
-        const response = await fetch(import.meta.env.VITE_REMOVE_BACKGROUND_POLL_URL, {
+        const response = await fetch(EnvConfig.getEnvVariable('VITE_REMOVE_BACKGROUND_POLL_URL')!, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id }),
@@ -116,7 +117,7 @@ const RemoveBg: React.FC = () => {
     const timeoutId = setTimeout(() => controller.abort(), 180000); // 3 minutes
     try {
       // Step 1: Submit image URL
-      const response = await fetch(import.meta.env.VITE_REMOVE_BACKGROUND_URL, {
+      const response = await fetch(EnvConfig.getEnvVariable('VITE_REMOVE_BACKGROUND_URL')!, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: imageUrl }),

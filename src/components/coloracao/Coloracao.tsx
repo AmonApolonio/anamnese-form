@@ -5,6 +5,7 @@ import UrlImageInput from '../shared/UrlImageInput';
 import RandomUrlButton from '../shared/RandomUrlButton';
 import Loader from '../quiz/Loader';
 import AnimationsStyles from '../shared/AnimationsStyles';
+import EnvConfig from '../../config/envConfig';
 
 interface FeatureAnalysis {
   color_palette: {
@@ -49,7 +50,7 @@ const Coloracao: React.FC = () => {
     let attempts = 0;
     while (attempts < 60) {
       try {
-        const response = await fetch(import.meta.env.VITE_COLOR_ANALYSIS_POLL_URL, {
+        const response = await fetch(EnvConfig.getEnvVariable('VITE_COLOR_ANALYSIS_POLL_URL')!, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id }),
@@ -143,7 +144,7 @@ const Coloracao: React.FC = () => {
 
     try {
       // Step 1: Submit image URL with type
-      const response = await fetch(import.meta.env.VITE_COLOR_ANALYSIS_URL, {
+      const response = await fetch(EnvConfig.getEnvVariable('VITE_COLOR_ANALYSIS_URL')!, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: imageUrl, type: 'frente_solto' }),
