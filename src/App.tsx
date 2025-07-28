@@ -3,21 +3,28 @@ import './index.css'; // Import base styles and font
 import './App.css'; // Import our custom CSS
 import Quiz from './Quiz.tsx';
 import Welcome from './components/Welcome';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import RemoveBg from './components/removeBg/RemoveBg.tsx';
 import Coloracao from './components/coloracao/Coloracao.tsx';
+import ColoracaoStep from './components/coloracao/ColoracaoStep.tsx';
+import ColoracaoResults from './components/coloracao/ColoracaoResults.tsx';
+import { ColoracaoProvider } from './contexts/ColoracaoContext.tsx';
 
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50 font-fraunces flex flex-col items-center justify-center">
-        <Routes>
-          <Route path="/" element={<WelcomePageWrapper />} />
-          <Route path="/quiz" element={<Quiz />} />
-          <Route path="/remove-bg" element={<RemoveBg />} />
-          <Route path="/coloracao" element={<Coloracao />} />
-        </Routes>
-      </div>
+      <ColoracaoProvider>
+        <div className="min-h-screen bg-gray-50 font-fraunces flex flex-col items-center justify-center">
+          <Routes>
+            <Route path="/" element={<WelcomePageWrapper />} />
+            <Route path="/quiz" element={<Quiz />} />
+            <Route path="/remove-bg" element={<RemoveBg />} />
+            <Route path="/coloracao" element={<Coloracao />} />
+            <Route path="/coloracao/:stepIndex" element={<ColoracaoStepWrapper />} />
+            <Route path="/coloracao/resultados" element={<ColoracaoResults />} />
+          </Routes>
+        </div>
+      </ColoracaoProvider>
     </Router>
   );
 }
@@ -33,6 +40,12 @@ const WelcomePageWrapper: React.FC = () => {
       />
     </>
   );
+};
+
+// Wrapper to force component remounting when step changes
+const ColoracaoStepWrapper: React.FC = () => {
+  const { stepIndex } = useParams<{ stepIndex: string }>();
+  return <ColoracaoStep key={stepIndex} />;
 };
 
 export default App;

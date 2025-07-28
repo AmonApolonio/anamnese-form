@@ -1,47 +1,8 @@
 import React, { useRef, useState } from 'react';
-import EnvConfig from '../../config/envConfig';
+import { StyleAnalysisService } from '../../services';
 
 const MAX_PHOTOS = 4;
 const MIN_PHOTOS = 1;
-
-// Get the N8N_POST_URL from EnvConfig
-const N8N_POST_URL = EnvConfig.getEnvVariable('VITE_STYLE_ANALYSIS_URL');
-
-// Utility to compress image files using canvas
-async function compressImage(file: File, maxSize = 550, quality = 0.7): Promise<File> {
-  return new Promise((resolve, reject) => {
-    const img = new window.Image();
-    img.onload = () => {
-      let { width, height } = img;
-      if (width > maxSize || height > maxSize) {
-        if (width > height) {
-          height = Math.round((height * maxSize) / width);
-          width = maxSize;
-        } else {
-          width = Math.round((width * maxSize) / height);
-          height = maxSize;
-        }
-      }
-      const canvas = document.createElement('canvas');
-      canvas.width = width;
-      canvas.height = height;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return reject(new Error('Canvas not supported'));
-      ctx.drawImage(img, 0, 0, width, height);
-      canvas.toBlob(
-        (blob) => {
-          if (!blob) return reject(new Error('Compression failed'));
-          const ext = file.type === 'image/png' ? 'png' : 'jpeg';
-          resolve(new File([blob], file.name, { type: `image/${ext}` }));
-        },
-        file.type === 'image/png' ? 'image/png' : 'image/jpeg',
-        quality
-      );
-    };
-    img.onerror = reject;
-    img.src = URL.createObjectURL(file);
-  });
-}
 
 const PhotoUpload: React.FC<{
   onComplete: (photos: { file: File; result: string; tags?: string[] }[]) => void,
@@ -111,7 +72,7 @@ const PhotoUpload: React.FC<{
     }
     // Compress the image before saving
     try {
-      file = await compressImage(file, 550, 0.7);
+      file = await StyleAnalysisService.compressImage(file, 550, 0.7);
     } catch (err) {
       setError('Erro ao comprimir a imagem.');
       return;
@@ -161,41 +122,15 @@ const PhotoUpload: React.FC<{
     }
     setError(null);
     setUploading(true);
-    if (!N8N_POST_URL) {
-      setError('URL de envio não configurada.');
-      setUploading(false);
-      return;
-    }
+
     try {
-      const uploadPromises = filesToSend.map(async (file, idx) => {
-        const formData = new FormData();
-        formData.append(`data`, file);
-        const res = await fetch(N8N_POST_URL, {
-          method: 'POST',
-          body: formData,
-        });
-        if (!res.ok) throw new Error(`Erro ao enviar foto ${idx + 1}`);
-        const data = await res.json();
-        let estilo = '';
-        let tags: string[] = [];
-        if (Array.isArray(data) && data[0]) {
-          estilo = data[0].estilo;
-          tags = data[0].tags;
-        } else if (data.estilo && data.tags) {
-          estilo = data.estilo;
-          tags = data.tags;
-        } else if (data.result) {
-          estilo = data.result;
-        }
-        return { file, result: estilo, tags };
-      });
-      const results = await Promise.all(uploadPromises);
+      const results = await StyleAnalysisService.analyzePhotos(filesToSend);
       setUploading(false);
       setUploaded(true);
       setUploadedResults(results);
       onComplete(results);
-    } catch (err) {
-      setError('Erro ao enviar as fotos.');
+    } catch (err: any) {
+      setError(err.message || 'Erro ao enviar as fotos.');
       setUploading(false);
       setUploaded(false);
       setUploadedResults([]);

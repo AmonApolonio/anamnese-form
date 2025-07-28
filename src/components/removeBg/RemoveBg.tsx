@@ -5,7 +5,7 @@ import UrlImageInput from '../shared/UrlImageInput';
 import RandomUrlButton from '../shared/RandomUrlButton';
 import Loader from '../quiz/Loader';
 import AnimationsStyles from '../shared/AnimationsStyles';
-import EnvConfig from '../../config/envConfig';
+import { BackgroundRemovalService } from '../../services';
 
 // List of random image URLs (populate as needed)
 const RANDOM_IMAGE_URLS = [
@@ -29,119 +29,23 @@ const RemoveBg: React.FC = () => {
   const [statusText, setStatusText] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  // Helper to poll for result
-  const pollForResult = async (id: string, controller: AbortController) => {
-    let attempts = 0;
-    while (attempts < 60) {
-      try {
-        const response = await fetch(EnvConfig.getEnvVariable('VITE_REMOVE_BACKGROUND_POLL_URL')!, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id }),
-          signal: controller.signal
-        });
-        if (response.headers.get('content-type')?.startsWith('image/')) {
-          setStatusText(null);
-          const blob = await response.blob();
-          return { image: URL.createObjectURL(blob) };
-        }
-        let data;
-        try {
-          data = await response.json();
-        } catch (jsonErr) {
-          setStatusText(null);
-          throw new Error('Erro inesperado ao processar a resposta do servidor.');
-        }
-        if (data && typeof data === 'object' && data.status === 'FAILED') {
-          console.log('N8N status (object):', data.status, data);
-          setStatusText(null);
-          let details = '';
-          if (data.output && data.output.details && Array.isArray(data.output.details)) {
-            details = data.output.details.join(' ');
-          }
-          throw new Error('Processamento falhou: ' + (details || data.error || 'Erro desconhecido.'));
-        }
-        // Only handle single object with status (not array)
-        if (data && typeof data === 'object' && typeof data.status === 'string') {
-          console.log('N8N status (single object):', data.status, data);
-          if (data.status === 'IN_QUEUE') {
-            setStatusText('Na fila..');
-            await new Promise(res => setTimeout(res, 10000)); // 10s
-            attempts++;
-            continue;
-          } else if (data.status === 'IN_PROGRESS') {
-            setStatusText('Processando...');
-            await new Promise(res => setTimeout(res, 5000)); // 5s
-            attempts++;
-            continue;
-          } else if (data.status === 'COMPLETED') {
-            setStatusText('Processando...');
-            attempts++;
-            continue;
-          } else if (data.status === 'FAILED') {
-            setStatusText(null);
-            let details = '';
-            if (data.output && data.output.details && Array.isArray(data.output.details)) {
-              details = data.output.details.join(' ');
-            }
-            throw new Error('Processamento falhou: ' + (details || data.error || 'Erro desconhecido.'));
-          } else if (data.status === 'CANCELLED') {
-            setStatusText(null);
-            throw new Error('Processamento foi cancelado.');
-          } else {
-            setStatusText(null);
-            throw new Error('Erro inesperado: ' + (data.error || 'Status desconhecido.'));
-          }
-        } else {
-          console.log('N8N status (unknown):', data);
-          setStatusText(null);
-          throw new Error('Erro inesperado do servidor.');
-        }
-        attempts++;
-      } catch (err: any) {
-        setStatusText(null);
-        throw err;
-      }
-    }
-    setStatusText(null);
-    throw new Error('Tempo limite atingido ao aguardar o processamento.');
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
     setResultUrl(null);
     setStatusText(null);
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 180000); // 3 minutes
+
     try {
-      // Step 1: Submit image URL
-      const response = await fetch(EnvConfig.getEnvVariable('VITE_REMOVE_BACKGROUND_URL')!, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: imageUrl }),
-        signal: controller.signal
-      });
-      if (!response.ok) throw new Error('Erro ao processar a imagem.');
-      const data = await response.json();
-      if (!data?.id) throw new Error('Resposta inesperada do servidor.');
-      const id = data.id;
-      // Step 2: Poll for result
-      const pollResult = await pollForResult(id, controller);
-      if (pollResult?.image) {
-        setResultUrl(pollResult.image);
-      } else {
-        throw new Error('Não foi possível obter a imagem processada.');
-      }
+      const result = await BackgroundRemovalService.removeBackground(
+        { url: imageUrl },
+        (status) => setStatusText(status === 'Completed' ? null : status)
+      );
+      
+      setResultUrl(result.image);
     } catch (err: any) {
-      if (err.name === 'AbortError') {
-        setError('Tempo limite atingido (3 minutos). Tente novamente mais tarde.');
-      } else {
-        setError(err.message || 'Erro desconhecido.');
-      }
+      setError(err.message || 'Erro desconhecido.');
     } finally {
-      clearTimeout(timeoutId);
       setLoading(false);
       setStatusText(null);
     }
