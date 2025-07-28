@@ -72,6 +72,7 @@ const ColoracaoResults: React.FC = () => {
   const [preloadedImages, setPreloadedImages] = useState<Record<string, boolean>>({});
   const [isImageLoading, setIsImageLoading] = useState<boolean>(false);
   const [currentImageSrc, setCurrentImageSrc] = useState<string>('');
+  const [imageOpacity, setImageOpacity] = useState<number>(1);
 
   const totalTests = 5; // Total number of tests
   const completedTests = Object.values(state).filter(result => result !== undefined).length;
@@ -120,22 +121,31 @@ const ColoracaoResults: React.FC = () => {
         
         // Check if image is already preloaded
         if (preloadedImages[newImageUrl]) {
-          // Image is ready, change immediately
-          setCurrentImageSrc(newImageUrl);
+          // Image is ready, fade out current image then change
+          setImageOpacity(0);
+          setTimeout(() => {
+            setCurrentImageSrc(newImageUrl);
+            setImageOpacity(1);
+          }, 150); // Half of the transition duration
         } else {
-          // Image not preloaded, show loading state
+          // Image not preloaded, show loading state with fade
+          setImageOpacity(0);
           setIsImageLoading(true);
           
           // Preload the specific image
           const img = new Image();
           img.onload = () => {
             setPreloadedImages(prev => ({ ...prev, [newImageUrl]: true }));
-            setCurrentImageSrc(newImageUrl);
-            setIsImageLoading(false);
+            setTimeout(() => {
+              setCurrentImageSrc(newImageUrl);
+              setIsImageLoading(false);
+              setImageOpacity(1);
+            }, 150);
           };
           img.onerror = () => {
             console.warn(`Failed to load image: ${newImageUrl}`);
             setIsImageLoading(false);
+            setImageOpacity(1);
           };
           img.src = newImageUrl;
         }
@@ -530,7 +540,8 @@ const ColoracaoResults: React.FC = () => {
                               <img 
                                 src={currentImageSrc} 
                                 alt="Imagem analisada" 
-                                className="w-64 h-auto"
+                                className="w-64 h-auto transition-opacity duration-300 ease-in-out"
+                                style={{ opacity: imageOpacity }}
                               />
                               
                               {/* Loading Overlay */}
