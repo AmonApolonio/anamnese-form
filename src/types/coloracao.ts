@@ -29,8 +29,9 @@ export interface FrentePresoResult {
     image_url: string;
     result: {
       forehead: FeatureAnalysis;
-      around_mouth: FeatureAnalysis;
       mouth: FeatureAnalysis;
+      below_mouth: FeatureAnalysis;
+      chin: FeatureAnalysis;
     };
   };
 }

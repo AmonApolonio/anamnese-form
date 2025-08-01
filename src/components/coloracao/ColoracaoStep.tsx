@@ -253,8 +253,9 @@ const ColoracaoStep: React.FC = () => {
         {currentStep.type === 'frente_preso' && 'forehead' in existingResult.output.result && (
           <>
             {renderColorResult(existingResult.output.result.forehead, 'Testa')}
-            {renderColorResult(existingResult.output.result.around_mouth, 'Região da Boca')}
+            {renderColorResult(existingResult.output.result.below_mouth, 'Abaixo da Boca')}
             {renderColorResult(existingResult.output.result.mouth, 'Boca')}
+            {renderColorResult(existingResult.output.result.chin, 'Queixo')}
           </>
         )}
         
