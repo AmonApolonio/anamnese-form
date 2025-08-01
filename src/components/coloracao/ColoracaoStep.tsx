@@ -122,7 +122,12 @@ const ColoracaoStep: React.FC = () => {
         throw new Error('Não foi possível obter o resultado da análise.');
       }
     } catch (err: any) {
-      const errorMsg = err.message || 'Erro desconhecido.';
+      // Extract and display the specific error message
+      let errorMsg = 'Erro desconhecido.';
+      if (err.message) {
+        errorMsg = err.message;
+      }
+      
       setError(errorMsg);
       updateFormState(currentStep.stateKey, {
         imageUrl,

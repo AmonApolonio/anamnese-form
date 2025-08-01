@@ -67,7 +67,20 @@ export class ApiClient {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      // Try to parse error response as JSON to get detailed error message
+      try {
+        const errorData = await response.json();
+        if (errorData.error) {
+          throw new Error(errorData.error);
+        }
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      } catch (jsonError) {
+        // If JSON parsing fails, fall back to generic HTTP error
+        if (jsonError instanceof Error && jsonError.message !== `HTTP ${response.status}: ${response.statusText}`) {
+          throw jsonError; // Re-throw the parsed error message
+        }
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
     }
 
     // Check if response is an image
