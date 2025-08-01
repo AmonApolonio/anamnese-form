@@ -335,18 +335,18 @@ const ColorExtractionsTab: React.FC<ColorExtractionsTabProps> = ({ onAnalysisCom
                         <div className="flex items-center gap-3 p-2 bg-white rounded-lg">
                           <div
                             className="w-12 h-8 rounded border border-gray-300"
-                            style={{ backgroundColor: state.frentePreso.output.result.below_mouth.color_palette.result }}
-                            title={state.frentePreso.output.result.below_mouth.color_palette.result}
-                          ></div>
-                          <span className="font-medium text-gray-800">Abaixo da boca</span>
-                        </div>
-                        <div className="flex items-center gap-3 p-2 bg-white rounded-lg">
-                          <div
-                            className="w-12 h-8 rounded border border-gray-300"
                             style={{ backgroundColor: state.frentePreso.output.result.mouth.color_palette.result }}
                             title={state.frentePreso.output.result.mouth.color_palette.result}
                           ></div>
                           <span className="font-medium text-gray-800">Boca</span>
+                        </div>
+                        <div className="flex items-center gap-3 p-2 bg-white rounded-lg">
+                          <div
+                            className="w-12 h-8 rounded border border-gray-300"
+                            style={{ backgroundColor: state.frentePreso.output.result.below_mouth.color_palette.result }}
+                            title={state.frentePreso.output.result.below_mouth.color_palette.result}
+                          ></div>
+                          <span className="font-medium text-gray-800">Abaixo da boca</span>
                         </div>
                         <div className="flex items-center gap-3 p-2 bg-white rounded-lg">
                           <div
